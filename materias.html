@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="Buscar Materias" onclick="buscarMaterias()">
+    <table id="Materias">
+       <tr><td id="Materia">Materias</td></tr>
+    </table> 
+   
+   <script>
+       function buscarMaterias() {
+           fetch("http://demo4898342.mockable.io/materiass")
+               .then(response => response.json())
+               .then(data => criarListaMaterias(data))
+               .catch(error => alert(error))
+
+       }
+       function criarListaMaterias(data) {
+           // debugger; 
+           // console.log(data); 
+           for (let i = 0; i < data.length; i++){
+               let item = `<tr><td>${data[i].Materia}</td></tr>`;
+               document.getElementById("Materias").innerHTML += item;
+           }
+       }
+       function preencherMateria(data){
+           document.getElementById("Materia").value = data.Materia;
+ 
+       }
+   </script>
+</body>
+</html>

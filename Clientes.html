@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes</title>
+</head>
+<body>
+    <input type="button" value="Buscar Clientes" onclick="buscarCliente()">
+     <table id="clientes">
+        <tr><td id="Cliente">Cliente</td><td id="Endereco">Endereço</td><td id="Telefone">Telefone</td></tr>
+     </table> 
+    
+    <script>
+        function buscarCliente() {
+            fetch("https://demo4898342.mockable.io/clientess")
+                .then(response => response.json())
+                .then(data => criarListaClientes(data))
+                .catch(error => alert(error))
+
+        }
+        function criarListaClientes(data) {
+            // debugger; 
+            // console.log(data); 
+            for (let i = 0; i < data.length; i++){
+                let item = `<tr><td>${data[i].Cliente}</td><td>${data[i].Endereco}</td><td>${data[i].Telefone}</td></tr>`;
+                document.getElementById("clientes").innerHTML += item;
+            }
+        }
+        function preencherCliente(data){
+            document.getElementById("Cliente").value = data.Cliente;
+            document.getElementById("Endereco").value = data.Endereco;
+            document.getElementById("Telefone").value = data.Telefone;
+        }
+    </script>
+</body>
+</html>

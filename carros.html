@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carros</title>
+</head>
+<body onload="buscarCarros()">
+    <label for="cars">Escolha um carro:</label>
+    <input type="button" value="Buscar Carros" onclick="buscarCarros()">
+    
+    <select id="cars" >
+      <option value="Carro" >Carro</option>
+      
+    </select>
+
+    <script>
+        function buscarCarros() {
+            fetch("https://demo4898342.mockable.io/carros")
+                .then(response => response.json())
+                .then(data => criarListaCarros(data))
+                .catch(error => alert(error))
+
+        }
+        function criarListaCarros(data) {
+            // debugger; 
+            console.log(data); 
+            for (let i = 0; i < data.length; i++){
+                let item = `<option value="Carro">${data[i].Carro}</option>`;
+                document.getElementById("cars").innerHTML += item;
+            }
+        }
+        function preencherCliente(data){
+            document.getElementById("Carro").value = data.Carro;
+ 
+        }
+    </script>
+</body>
+</html>
